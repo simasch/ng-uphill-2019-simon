@@ -33,9 +33,10 @@ export class ToDoService {
       );
   }
 
-  saveTodo(todo: ToDo) {
-    // TODO: Part of the exercise
-    console.log('Not yet implemented ...');
+  saveTodo(todo: ToDo): Observable<ToDo> {
+    return this.http.post<ToDo>(backendUrl, todo).pipe(
+      map(data => ToDo.createFromJson(data)),
+    );
   }
 
   updateTodo(todo: ToDo) {

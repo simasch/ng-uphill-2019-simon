@@ -18,8 +18,9 @@ export class TodoScreenComponent implements OnInit {
   }
 
   addToDo(todo: ToDo) {
-    // TODO: Part of the exercise
-    console.log('Not yet implemented ...');
+    this.todoService.saveTodo(todo).subscribe(t => {
+      this.loadToDos();
+    });
   }
 
   completeToDo(todo: ToDo) {
