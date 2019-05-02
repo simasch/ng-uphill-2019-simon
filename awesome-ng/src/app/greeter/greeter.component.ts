@@ -27,6 +27,10 @@ import {Component} from '@angular/core';
       </li>
     </ul>
 
+    <p>
+      <button (click)="addPerson()">Add Person</button>
+    </p>
+
     <a routerLink="/">Home</a>
   `
 })
@@ -40,5 +44,9 @@ export class GreeterComponent {
 
   public sayHello(value: string) {
     this.title = value;
+  }
+
+  addPerson() {
+    this.people.push('Person');
   }
 }
