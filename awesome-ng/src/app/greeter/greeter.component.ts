@@ -21,10 +21,19 @@ import {Component} from '@angular/core';
       <button (click)="sayHello(thatsMyVariable.value)">Say Hello</button>
     </p>
 
+    <ul>
+      <li *ngFor="let person of people">
+        {{ person }}
+      </li>
+    </ul>
+
     <a routerLink="/">Home</a>
   `
 })
+
 export class GreeterComponent {
+
+  people = ['Simon', 'Peter', 'Max'];
 
   title = 'Greetings from Gurten';
   name = 'Your name';
