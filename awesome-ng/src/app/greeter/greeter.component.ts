@@ -2,10 +2,12 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-greeter',
+
   styles: [`
     h3 {
       color: red;
     }`],
+
   template: `
     <h3>{{ title }} {{ name }}</h3>
 
@@ -18,12 +20,13 @@ import {Component} from '@angular/core';
     <p>
       <button (click)="sayHello(thatsMyVariable.value)">Say Hello</button>
     </p>
+
+    <a routerLink="/">Home</a>
   `
 })
 export class GreeterComponent {
 
   title = 'Greetings from Gurten';
-
   name = 'Your name';
 
   public sayHello(value: string) {
