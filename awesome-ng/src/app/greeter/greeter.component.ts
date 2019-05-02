@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import DateTimeFormat = Intl.DateTimeFormat;
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-greeter',
@@ -8,18 +7,26 @@ import DateTimeFormat = Intl.DateTimeFormat;
       color: red;
     }`],
   template: `
-    <h3>{{ title }}</h3>
+    <h3>{{ title }} {{ name }}</h3>
 
-    <input [(ngModel)]="title">
-
-    <button (click)="sayHello()">Say Hello</button>
+    <p>
+      <input #thatsMyVariable [value]="title">
+    </p>
+    <p>
+      <input [(ngModel)]="name">
+    </p>
+    <p>
+      <button (click)="sayHello(thatsMyVariable.value)">Say Hello</button>
+    </p>
   `
 })
 export class GreeterComponent {
 
   title = 'Greetings from Gurten';
 
-  public sayHello() {
-    this.title = new Date().toLocaleString();
+  name = 'Your name';
+
+  public sayHello(value: string) {
+    this.title = value;
   }
 }
