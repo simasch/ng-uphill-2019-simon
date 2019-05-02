@@ -18,14 +18,17 @@ export class TodoScreenComponent implements OnInit {
   }
 
   addToDo(todo: ToDo) {
+    this.todos.push(todo);
     this.todoService.saveTodo(todo).subscribe(t => {
-      this.loadToDos();
+      todo.id = t.id;
     });
   }
 
   completeToDo(todo: ToDo) {
-    // TODO: Part of the exercise
-    console.log('Not yet implemented ...');
+    todo.completed = true;
+    this.todoService.updateTodo(todo).subscribe(t => {
+      this.loadToDos();
+    });
   }
 
   private loadToDos() {

@@ -7,7 +7,6 @@ import {ToDo} from '../../model/todo.model';
 })
 export class TodoListComponent {
 
-
   @Input() todos: ToDo[];
   @Output() removeToDo = new EventEmitter<ToDo>();
 

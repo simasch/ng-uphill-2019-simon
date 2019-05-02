@@ -10,8 +10,18 @@ const backendUrl = 'http://localhost:3456/todos';
 // Describe the data received from the backend.
 // Note: These are interfaces, since the HttpClient returns plain JavaScript objects, not class instances!
 // Note: Ideally these interfaces are generated based on the definition of the api
-export interface ToDoData { id: string; title: String;  completed: boolean; } // Note: This has the same structure as the ToDo model class
-interface ToDoGetResponse { data: ToDoData[]; }
+export interface ToDoData {
+  id: string;
+  title: String;
+  completed: boolean;
+} // Note: This has the same structure as the ToDo model class
+interface ToDoGetResponse {
+  data: ToDoData[];
+}
+
+interface ToDoPostResponse {
+  data: ToDoData;
+}
 
 @Injectable({providedIn: 'root'})
 export class ToDoService {
@@ -27,21 +37,21 @@ export class ToDoService {
         // Map the plain JavaScript object to instances of the model class.
         // This is optional, the application could work with the ToDoData interface.
         map(todosArrayData => todosArrayData.map((todoData) => {
-            return ToDo.createFromJson(todoData);
-          })),
+          return ToDo.createFromJson(todoData);
+        })),
         catchError(this.handleError)
       );
   }
 
   saveTodo(todo: ToDo): Observable<ToDo> {
-    return this.http.post<ToDo>(backendUrl, todo).pipe(
-      map(data => ToDo.createFromJson(data)),
-    );
+    return this.http.post<ToDoPostResponse>(backendUrl, todo)
+      .pipe(
+        map(t => ToDo.createFromJson(t.data))
+      );
   }
 
   updateTodo(todo: ToDo) {
-    // TODO: Part of the exercise
-    console.log('Not yet implemented ...');
+    return this.http.put<ToDo>(backendUrl + '/' + todo.id, todo);
   }
 
   deleteTodo(todo: ToDo) {
